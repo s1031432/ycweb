@@ -83,7 +83,7 @@ bot.on('message', function (event) {
 function checkPhone(phone){
     console.log(customList);
     for(var i=0;i<customList.length;i++){
-        if(customList["手機號碼"] == phone){
+        if(customList[i]["手機號碼"] == phone){
             return true;
         }
     }
@@ -91,7 +91,7 @@ function checkPhone(phone){
 }
 function checkMail(mail){
     for(var i=0;i<customList.length;i++){
-        if(customList["電子郵件"] == mail){
+        if(customList[i]["電子郵件"] == mail){
             return true;
         }
     }
