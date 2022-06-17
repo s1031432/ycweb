@@ -61,6 +61,7 @@ bot.on('message', function (event) {
                     users[myId].photoStep = 0;
                     users[myId].mail = users[myId].userMsg;
                     users[myId].photoLink = getPhotoLink(users[myId].phone, users[myId].mail);
+                    console.log(users[myId].photoLink);
                     if(users[myId].photoLink){
                         users[myId].replyMsg.push("身分驗證成功，附上您的成品連結如下，再次感謝您蒞臨本店。");
                         users[myId].replyMsg.push(users[myId].photoLink);
@@ -99,8 +100,8 @@ function checkMail(mail){
 }
 function getPhotoLink(phone, mail){
     for(var i=0;i<customList.length;i++){
-        if(customList["手機號碼"] == phone && customList["電子郵件"] == mail){
-            return customList["成品雲端連結"];
+        if(customList[i]["手機號碼"] == phone && customList[i]["電子郵件"] == mail){
+            return customList[i]["成品雲端連結"];
         }
     }
     return false;
