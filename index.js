@@ -75,7 +75,7 @@ bot.on('message', function (event) {
             sendMessage(event, users[myId].replyMsg, "(Not text)");
         }
         sendMessage(event, replyMsg, userMsg);
-    }
+    });
 });
 
 function checkPhone(phone){
