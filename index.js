@@ -18,62 +18,64 @@ customList = [];
 //     '成品雲端連結': 'ee'
 // }
 bot.on('message', function (event) {
-    var myId=event.source.userId;
-    if (users[myId]==undefined){
-        users[myId]=[];
-        users[myId].userId = profile.userId;
-        users[myId].userName = profile.displayName;
-        users[myId].userMsg = event.message.text;
-        users[myId].replyMsg = [];
-        users[myId].photoStep = 0;
-        users[myId].phone = "";
-        users[myId].mail = "";
-    }
-    else{
-        users[myId].replyMsg = [];
-        users[myId].userMsg = event.message.text;
-    }
-    if(event.message.type == "text"){
-        if(users[myId].userMsg == "取件"){
-            users[myId].photoStep = 1;
-            users[myId].replyMsg.push("請輸入您的電話");
-            sendMessage(event, users[myId].replyMsg, users[myId].userMsg);
-            // Update custom data
-            request({
-                uri:    goldenYearsCsv,
-                method: "GET",
-                timeout: 6000,
-                }, (err, res, body) => {
-                    // Update custom data
-                    customList = csv2json(data);
-                }
-            );
+    event.source.profile().then(function (profile){
+        var myId=event.source.userId;
+        if (users[myId]==undefined){
+            users[myId]=[];
+            users[myId].userId = profile.userId;
+            users[myId].userName = profile.displayName;
+            users[myId].userMsg = event.message.text;
+            users[myId].replyMsg = [];
+            users[myId].photoStep = 0;
+            users[myId].phone = "";
+            users[myId].mail = "";
         }
-        if(users[myId].photoStep){
-            if(users[myId].photoStep == 1 && checkPhone(users[myId].userMsg)){
-                users[myId].photoStep = 2;
-                users[myId].phone = users[myId].userMsg;
-                users[myId].replyMsg.push("請輸入您的電子郵件");
+        else{
+            users[myId].replyMsg = [];
+            users[myId].userMsg = event.message.text;
+        }
+        if(event.message.type == "text"){
+            if(users[myId].userMsg == "取件"){
+                users[myId].photoStep = 1;
+                users[myId].replyMsg.push("請輸入您的電話");
+                sendMessage(event, users[myId].replyMsg, users[myId].userMsg);
+                // Update custom data
+                request({
+                    uri:    goldenYearsCsv,
+                    method: "GET",
+                    timeout: 6000,
+                    }, (err, res, body) => {
+                        // Update custom data
+                        customList = csv2json(data);
+                    }
+                );
             }
-            if(users[myId].photoStep == 2 && checkMail(users[myId].userMsg)){
-                users[myId].photoStep = 0;
-                users[myId].mail = users[myId].userMsg;
-                users[myId].photoLink = getPhotoLink(phone, mail);
-                if(users[myId].photoLink){
-                    users[myId].replyMsg.push("身分驗證成功，附上您的成品連結如下，再次感謝您蒞臨本店。");
-                    users[myId].replyMsg.push(users[myId].photoLink);
+            if(users[myId].photoStep){
+                if(users[myId].photoStep == 1 && checkPhone(users[myId].userMsg)){
+                    users[myId].photoStep = 2;
+                    users[myId].phone = users[myId].userMsg;
+                    users[myId].replyMsg.push("請輸入您的電子郵件");
                 }
-                else{
-                    users[myId].replyMsg.push("身分驗證成功，成品尚在趕工修圖當中，請您見諒。");
+                if(users[myId].photoStep == 2 && checkMail(users[myId].userMsg)){
+                    users[myId].photoStep = 0;
+                    users[myId].mail = users[myId].userMsg;
+                    users[myId].photoLink = getPhotoLink(phone, mail);
+                    if(users[myId].photoLink){
+                        users[myId].replyMsg.push("身分驗證成功，附上您的成品連結如下，再次感謝您蒞臨本店。");
+                        users[myId].replyMsg.push(users[myId].photoLink);
+                    }
+                    else{
+                        users[myId].replyMsg.push("身分驗證成功，成品尚在趕工修圖當中，請您見諒。");
+                    }
                 }
             }
         }
+        else{
+            users[myId].replyMsg.push("我只看得懂圖片QQ");
+            sendMessage(event, users[myId].replyMsg, "(Not text)");
+        }
+        sendMessage(event, replyMsg, userMsg);
     }
-    else{
-        users[myId].replyMsg.push("我只看得懂圖片QQ");
-        sendMessage(event, users[myId].replyMsg, "(Not text)");
-    }
-    sendMessage(event, replyMsg, userMsg);
 });
 
 function checkPhone(phone){
