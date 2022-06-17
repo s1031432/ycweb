@@ -74,7 +74,6 @@ bot.on('message', function (event) {
             users[myId].replyMsg.push("我只看得懂圖片QQ");
             sendMessage(event, users[myId].replyMsg, "(Not text)");
         }
-        sendMessage(event, replyMsg, userMsg);
     });
 });
 
