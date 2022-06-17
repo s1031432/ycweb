@@ -75,7 +75,7 @@ bot.on('message', function (event) {
             }
         }
         else{
-            users[myId].replyMsg.push("我只看得懂圖片QQ");
+            users[myId].replyMsg.push("我只看得懂文字QQ");
             sendMessage(event, users[myId].replyMsg, "(Not text)");
         }
     });
