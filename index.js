@@ -59,7 +59,7 @@ bot.on('message', function (event) {
                 if(users[myId].photoStep == 2 && checkMail(users[myId].userMsg)){
                     users[myId].photoStep = 0;
                     users[myId].mail = users[myId].userMsg;
-                    users[myId].photoLink = getPhotoLink(phone, mail);
+                    users[myId].photoLink = getPhotoLink(users[myId].phone, users[myId].mail);
                     if(users[myId].photoLink){
                         users[myId].replyMsg.push("身分驗證成功，附上您的成品連結如下，再次感謝您蒞臨本店。");
                         users[myId].replyMsg.push(users[myId].photoLink);
