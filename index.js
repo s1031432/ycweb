@@ -47,6 +47,7 @@ bot.on('message', function (event) {
                     }, (err, res, body) => {
                         // Update custom data
                         customList = csv2json(body);
+                        console.log(customList);
                     }
                 );
             }
@@ -80,6 +81,7 @@ bot.on('message', function (event) {
 });
 
 function checkPhone(phone){
+    console.log(customList);
     for(var i=0;i<customList.length;i++){
         if(customList["手機號碼"] == phone){
             return true;
