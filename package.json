@@ -2,5 +2,17 @@
   "dependencies": {
     "linebot": "^1.6.1",
     "request": "^2.88.2"
-  }
+  },
+  "name": "yclinebot",
+  "version": "1.0.0",
+  "main": "index.js",
+  "devDependencies": {},
+  "scripts": {
+    "start": "node --trace-warnings index.js ",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "node --inspect index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
