@@ -46,7 +46,7 @@ bot.on('message', function (event) {
                     timeout: 6000,
                     }, (err, res, body) => {
                         // Update custom data
-                        customList = csv2json(data);
+                        customList = csv2json(body);
                     }
                 );
             }
