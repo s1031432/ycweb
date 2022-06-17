@@ -8,6 +8,7 @@ const bot = linebot({
     channelAccessToken: 'KLJGS90t85MQb4BxMNapjCk+MkWq1j8048nPGi6CGE/LsiG3MMpT229VxyaBRWkOVyQoCQ3adrQ2puxc9M8BkHr14DKv9jl4BM8VkoyETNI8/tXUroeAUZyWtKkOYHAINQCdc1ljtyjk6cPeijMIuAdB04t89/1O/w1cDnyilFU='
 });
 const goldenYearsCsv = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTyBNycncdco9uhIst6gTlK_EbQL21nt6lfV5sbYbyp-GsEHf6zQR4mnnVg32Z-jA6nwxLysDAyMF_9/pub?output=csv'
+var users=[];
 customList = [];
 // {
 //     '時間戳記': 'aa',
