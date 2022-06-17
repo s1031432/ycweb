@@ -55,7 +55,6 @@ bot.on('message', function (event) {
                     users[myId].photoStep = 2;
                     users[myId].phone = users[myId].userMsg;
                     users[myId].replyMsg.push("請輸入您的電子郵件");
-                    sendMessage(event, users[myId].replyMsg, users[myId].userMsg);
                 }
                 if(users[myId].photoStep == 2 && checkMail(users[myId].userMsg)){
                     users[myId].photoStep = 0;
@@ -66,10 +65,11 @@ bot.on('message', function (event) {
                         users[myId].replyMsg.push(users[myId].photoLink);
                     }
                     else{
-                        users[myId].replyMsg.push("身分驗證成功，成品尚在趕工修圖當中，請您見諒。");
+                        users[myId].replyMsg.push("身分驗證成功，經查您成品尚在趕工修圖當中，請您見諒。");
                     }
-                    sendMessage(event, users[myId].replyMsg, users[myId].userMsg);
+                    
                 }
+                sendMessage(event, users[myId].replyMsg, users[myId].userMsg);
             }
         }
         else{
