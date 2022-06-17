@@ -99,7 +99,7 @@ function checkMail(mail){
 }
 function getPhotoLink(phone, mail){
     for(var i=0;i<customList.length;i++){
-        if(customList["手機號碼"] == photo && customList["電子郵件"] == mail){
+        if(customList["手機號碼"] == phone && customList["電子郵件"] == mail){
             return customList["成品雲端連結"];
         }
     }
