@@ -1,0 +1,89 @@
+body {
+    overflow-x: hidden;
+    color: #000000d9;
+    font-size: 14px;
+    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,apple color emoji,segoe ui emoji,Segoe UI Symbol,noto color emoji;
+    background: #fff;
+    transition: background 1s cubic-bezier(.075,.82,.165,1);
+}
+thead {
+    display: table-header-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+.ant-table-wrapper {
+    clear: both;
+    max-width: 100%;
+}
+.ant-table table {
+    width: 100%;
+    text-align: left;
+    border-radius: 2px 2px 0 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+.ant-table {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: #000000d9;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    font-feature-settings: "tnum";
+    position: relative;
+    font-size: 14px;
+    background: #fff;
+    border-radius: 2px;
+    text-align:center;
+}
+th {
+    display: table-cell;
+    vertical-align: inherit;
+    font-weight: bold;
+    text-align: -internal-center;
+}
+
+.ant-table-tbody>tr>td {
+    border-bottom: 1px solid rgba(0,0,0,.06);
+    /* transition: all .3s; */
+}
+.ant-table > .ant-input {
+    font-family: Consolas,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New, monospace;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 3px;
+    font-variant: tabular-nums;
+    list-style: none;
+    font-feature-settings: "tnum";
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    min-width: 0;
+    padding: 4px 11px;
+    color: #000000d9;
+    font-size: 14px;
+    line-height: 1.5715;
+    background-color: #fff;
+    background-image: none;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    transition: all .3s;
+    text-align:center;
+}
+.ant-table .ant-table-container:before, .ant-table .ant-table-container:after {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    z-index: 1;
+    width: 30px;
+    transition: box-shadow .3s;
+    content: "";
+    pointer-events: none;
+}
+
+.ant-table-thead>tr>th, .ant-table-tbody>tr>td, .ant-table tfoot>tr>th, .ant-table tfoot>tr>td {
+    position: relative;
+    padding: 16px;
+    overflow-wrap: break-word;
+}

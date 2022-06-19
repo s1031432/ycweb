@@ -10,6 +10,7 @@ const bot = linebot({
 const goldenYearsCsv = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTyBNycncdco9uhIst6gTlK_EbQL21nt6lfV5sbYbyp-GsEHf6zQR4mnnVg32Z-jA6nwxLysDAyMF_9/pub?output=csv'
 var users=[];
 customList = [];
+
 // {
 //     '時間戳記': 'aa',
 //     '客戶姓名': 'cc',
@@ -17,6 +18,7 @@ customList = [];
 //     '手機號碼': 'dd',
 //     '成品雲端連結': 'ee'
 // }
+
 bot.on('message', function (event) {
     event.source.profile().then(function (profile){
         var myId=event.source.userId;
@@ -41,9 +43,8 @@ bot.on('message', function (event) {
                 sendMessage(event, users[myId].replyMsg, users[myId].userMsg);
                 // Update custom data
                 request({
-                    uri:    goldenYearsCsv,
-                    method: "GET",
-                    timeout: 6000,
+                        uri:    goldenYearsCsv,
+                        method: "GET",
                     }, (err, res, body) => {
                         // Update custom data
                         customList = csv2json(body);
@@ -73,6 +74,9 @@ bot.on('message', function (event) {
                 }
                 sendMessage(event, users[myId].replyMsg, users[myId].userMsg);
             }
+            else{
+                users[myId].replyMsg.push(getWSelcomeText());
+            }
         }
         else{
             users[myId].replyMsg.push("我只看得懂文字QQ");
@@ -98,12 +102,15 @@ function checkMail(mail){
     }
     return false;
 }
-function getPhotoLink(phone, mail){
+function getOrderData(phone, mail){
+    var result = []
     for(var i=0;i<customList.length;i++){
         if(customList[i]["手機號碼"] == phone && customList[i]["電子郵件"] == mail){
-            return customList[i]["成品雲端連結"];
+            result.push(customList[i]);
         }
     }
+    if(result.length)
+        return result;
     return false;
 }
 function csv2json(csv_str){

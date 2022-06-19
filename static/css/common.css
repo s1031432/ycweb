@@ -1,0 +1,19 @@
+a, area, button, [role=button], input:not([type=range]), label, select, summary, textarea {
+    touch-action: manipulation;
+}
+a {
+    transition: color .3s ease;
+}
+a {
+    color: #1890ff;
+    text-decoration: none;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+    transition: color .3s;
+    -webkit-text-decoration-skip: objects;
+}
+.container {
+    text-align:center;
+    margin:0 auto;
+}

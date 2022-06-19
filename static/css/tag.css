@@ -1,0 +1,111 @@
+.ant-tag {
+    box-sizing: border-box;
+    margin: 0 8px 0 0;
+    color: #000000d9;
+    font-size: 14px;
+    font-variant: tabular-nums;
+    line-height: 1.5715;
+    list-style: none;
+    font-feature-settings: "tnum";
+    display: inline-block;
+    height: auto;
+    padding: 0 7px;
+    font-size: 12px;
+    line-height: 20px;
+    white-space: nowrap;
+    background: #fafafa;
+    border: 1px solid #d9d9d9;
+    border-radius: 2px;
+    opacity: 1;
+    transition: all .3s;
+    cursor: pointer;
+}
+.ant-tag:hover {
+    opacity:0.85;
+}
+.ant-tag-has-color, .ant-tag-has-color a, .ant-tag-has-color a:hover, .ant-tag-has-color .anticon-close, .ant-tag-has-color .anticon-close:hover {
+    color: #fff;
+}
+.ant-tag-checkable {
+    background-color: transparent;
+    border-color: transparent;
+    cursor: pointer;
+}
+.ant-tag-checkable-checked {
+    background-color: #1890ff;
+}
+.ant-tag-magenta {
+    color: #c41d7f;
+    background: #fff0f6;
+    border-color: #ffadd2;
+}
+.ant-tag-red {
+    color: #cf1322;
+    background: #fff1f0;
+    border-color: #ffa39e;
+}
+.ant-tag-volcano {
+    color: #d4380d;
+    background: #fff2e8;
+    border-color: #ffbb96;
+}
+.ant-tag-orange {
+    color: #d46b08;
+    background: #fff7e6;
+    border-color: #ffd591;
+}
+.ant-tag-gold {
+    color: #d48806;
+    background: #fffbe6;
+    border-color: #ffe58f;
+}
+.ant-tag-lime {
+    color: #7cb305;
+    background: #fcffe6;
+    border-color: #eaff8f;
+}
+.ant-tag-green {
+    color: #389e0d;
+    background: #f6ffed;
+    border-color: #b7eb8f;
+}
+.ant-tag-cyan {
+    color: #08979c;
+    background: #e6fffb;
+    border-color: #87e8de;
+}
+.ant-tag-blue {
+    color: #096dd9;
+    background: #e6f7ff;
+    border-color: #91d5ff;
+}
+.ant-tag-geekblue {
+    color: #1d39c4;
+    background: #f0f5ff;
+    border-color: #adc6ff;
+}
+.ant-tag-purple {
+    color: #531dab;
+    background: #f9f0ff;
+    border-color: #d3adf7;
+}
+.ant-tag-success {
+    color: var(--ant-success-color);
+    background: var(--ant-success-color-deprecated-bg);
+    border-color: var(--ant-success-color-deprecated-border);
+}
+.ant-tag-processing {
+    color: var(--ant-info-color);
+    background: var(--ant-info-color-deprecated-bg);
+    border-color: var(--ant-info-color-deprecated-border);
+}
+.ant-tag-error {
+    color: var(--ant-error-color);
+    background: var(--ant-error-color-deprecated-bg);
+    border-color: var(--ant-error-color-deprecated-border);
+}
+.ant-tag-warning {
+    color: var(--ant-warning-color);
+    background: var(--ant-warning-color-deprecated-bg);
+    border-color: var(--ant-warning-color-deprecated-border);
+}

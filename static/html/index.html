@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>好時有影-客戶預約瀏覽(攝影師版本)</title>
+        <link rel="stylesheet" href="../css/color.css">
+        <link rel="stylesheet" href="../css/common.css">
+        <link rel="stylesheet" href="../css/table.css">
+        <link rel="stylesheet" href="../css/pagination.css">
+        <link rel="stylesheet" href="../css/tag.css">
+        <script src="../js/jquery-3.6.0.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>好時有影-客戶預約瀏覽</h1>
+            <div class="ant-table-wrapper" style="width:80%;margin:0 auto;">
+                <div class="ant-spin-container">
+                    <div class="ant-table">
+                        <div class="ant-table-container">
+                            <div class="ant-table-content">
+                                <table style="table-layout: auto;">
+                                    <colgroup></colgroup>
+                                    <thead class="ant-table-thead">
+                                        <tr>
+                                            <th nowrap="nowrap" class="ant-table-cell">預約日期與時間</th>
+                                            <th nowrap="nowrap" class="ant-table-cell">姓名/人數</th>
+                                            <th nowrap="nowrap" class="ant-table-cell">手機</th>
+                                            <th nowrap="nowrap" class="ant-table-cell">電子郵件</th>
+                                            <th nowrap="nowrap" class="ant-table-cell">職稱</th>
+                                            <th nowrap="nowrap" class="ant-table-cell">拍攝項目</th>
+                                            <th nowrap="nowrap" class="ant-table-cell">加購妝髮</th>
+                                            <th nowrap="nowrap" class="ant-table-cell">備註</th>
+
+                                            <th class="ant-table-cell">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="custom_data" class="ant-table-tbody">
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="ant-pagination ant-table-pagination ant-table-pagination-right" unselectable="unselectable">
+                        <li title="Previous Page" class="ant-pagination-prev ant-pagination-disabled" aria-disabled="true">
+                            <button class="ant-pagination-item-link" type="button" tabindex="-1" disabled=""><span role="img"
+                                    aria-label="left" class="anticon anticon-left"><svg viewBox="64 64 896 896"
+                                        focusable="false" data-icon="left" width="1em" height="1em" fill="currentColor"
+                                        aria-hidden="true">
+                                        <path
+                                            d="M724 218.3V141c0-6.7-7.7-10.4-12.9-6.3L260.3 486.8a31.86 31.86 0 000 50.3l450.8 352.1c5.3 4.1 12.9.4 12.9-6.3v-77.3c0-4.9-2.3-9.6-6.1-12.6l-360-281 360-281.1c3.8-3 6.1-7.7 6.1-12.6z">
+                                        </path>
+                                    </svg></span></button></li>
+                        <li title="1" class="ant-pagination-item ant-pagination-item-1 ant-pagination-item-active" tabindex="0">
+                            <a id="page" rel="nofollow">1</a>
+                        </li>
+                        <li title="Next Page" class="ant-pagination-next ant-pagination-disabled" aria-disabled="true">
+                            <button class="ant-pagination-item-link" type="button" tabindex="-1" disabled="">
+                                <span role="img" aria-label="right" class="anticon anticon-right">
+                                    <svg viewBox="64 64 896 896" focusable="false" data-icon="right" width="1em" height="1em" fill="currentColor" aria-hidden="true">
+                                        <path d="M765.7 486.8L314.9 134.7A7.97 7.97 0 00302 141v77.3c0 4.9 2.3 9.6 6.1 12.6l360 281.1-360 281.1c-3.9 3-6.1 7.7-6.1 12.6V883c0 6.7 7.7 10.4 12.9 6.3l450.8-352.1a31.96 31.96 0 000-50.4z"></path>
+                                    </svg>
+                                </span>
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
+<!-- https://script.google.com/macros/s/AKfycbz0M2PZjMX1BKzPVpgzSh8pBYnla_ITXq17bvlSu2ujV_-HgawhCK4gh8sVUZcYHDbMhQ/exec -->
+<script>
+    function getDate(TS) {
+        var D = new Date(TS);
+        var y = D.getFullYear();
+        var M = (D.getMonth() + 1);
+        if (M == '0' || M == '1' || M == '2' || M == '3' || M == '4' || M == '5' || M == '6' || M == '7' || M == '8' || M == '9')
+            M = "0" + M;
+        var d = D.getDate();
+        if (d == '0' || d == '1' || d == '2' || d == '3' || d == '4' || d == '5' || d == '6' || d == '7' || d == '8' || d == '9')
+            d = "0" + d;
+
+        var yyyymmdd = y + "/" + M + "/" + d;
+        return yyyymmdd;
+    }
+        function csv2list(csv_string){
+            var jsonFormat = csv_string.split(",");
+            jsonFormat[6] = "妝髮";
+            var temp = [];
+            var time_string = "";
+            var result = [];
+            console.log(jsonFormat);
+            for(var i=0;i<jsonFormat.length;i++){
+                // jsonFormat[i] = jsonFormat[i].replace(" ", "");
+                jsonFormat[i] = jsonFormat[i].replace("一般區：半身照600/全身照900/合照900 (*預設灰底背景，白底或去背照加收300元)", "一般拍攝");
+                jsonFormat[i] = jsonFormat[i].replace("證件照區：韓式證件照600/學士證件照600", "證件照");
+                jsonFormat[i] = jsonFormat[i].replace("3位以上請於備註欄說明", "3位");
+                if( (i%13 == 0 || i == jsonFormat.length-1) && temp.length){
+                    result.push(temp);
+                    temp = [];
+                }
+                if(jsonFormat[i].indexOf("-") > -1){
+                    jsonFormat[i] = jsonFormat[i].replace(" ", "");
+                    jsonFormat[i] = jsonFormat[i].slice(0, 11);
+                    for(var j=1;;j++){
+                        jsonFormat[i+j] = jsonFormat[i+j].replace(" ", "");
+                        jsonFormat[i+j] = jsonFormat[i+j].slice(0, 11);
+                        if(jsonFormat[i+j].indexOf("-") == -1){
+                            jsonFormat = jsonFormat.filter(function(value, index, arr){
+                                return value != "!*";
+                            })
+                            break;
+                        }
+                        else{
+                            jsonFormat[i] = jsonFormat[i] + "+" + jsonFormat[i+j];
+                            jsonFormat[i+j] = "!*";
+                        }
+                    }
+                }
+                temp.push(jsonFormat[i]);
+            }
+            console.log(jsonFormat);
+            return result;
+        }
+        function list2str(list2d){
+            for(var i=0;i<list2d.length;i++){
+                list2d[i] = list2d[i].join(",");
+            }
+            csv_string = list2d.join("\r\n");
+            return csv_string;
+        }
+        function csv2json(csv_str){
+            var csv = csv_str;
+            csv = csv.split("\r\n");
+            var json_list = [];
+            var header_list = csv[0].split(",");
+            for(var i=1;i<csv.length;i++){
+                // each_row
+                let each_data_string = csv[i];
+                let each_cell_string = each_data_string.split(",");
+                let tempObj = {};
+                for(var j=0;j<header_list.length;j++){
+                    tempObj[header_list[j]] = each_cell_string[j];
+                }
+                json_list.push(tempObj);
+            }
+            return json_list;
+        }
+    // <tr data-row-key="1" class="ant-table-row ant-table-row-level-0">
+    //     <td class="ant-table-cell"><a>John Brown</a></td>
+    //     <td class="ant-table-cell">32</td>
+    //     <td class="ant-table-cell">New York No. 1 Lake Park</td>
+    //     <td class="ant-table-cell"><span class="ant-tag ant-tag-green">NICE</span><span
+    //             class="ant-tag ant-tag-geekblue">DEVELOPER</span></td>
+    //     <td class="ant-table-cell">
+    //         <div class="ant-space ant-space-horizontal ant-space-align-center"
+    //             style="gap: 16px;">
+    //             <div class="ant-space-item"><a>Invite John Brown</a></div>
+    //             <div class="ant-space-item"><a>Delete</a></div>
+    //         </div>
+    //     </td>
+    // </tr>
+
+    $.ajax({
+        url: "https://script.google.com/macros/s/AKfycbx2MLH7nnGOhrEHhN61cEBp5UqZXq9Jk1MT_z-6-9QMwETJxK_ybMY2G0YBim9b2m4yew/exec",
+        success: function(result){
+            var data = csv2list(result);
+            data = list2str(data);
+            data = csv2json(data);
+            console.log(data);
+            tdhtml = "";
+            // for(i=0;i<data.length;i++){
+            for(i=$("#page").text()*10-10;i<$("#page").text()*10;i++){
+                data[i]["請問您的大名或英文名"] = data[i]["請問您的大名或英文名"][0] + "**";
+                data[i]["聯繫電話"] = "09"+data[i]["聯繫電話"].slice(2,4)+"***"+data[i]["聯繫電話"].slice(7,10);
+                data[i]["預約時段"] = "　- "+data[i]["預約時段"];
+                data[i]["預約時段"] = data[i]["預約時段"].replaceAll("+", "<br>　- ");
+                if(data[i]["拍攝項目"] == "一般拍攝"){
+                    data[i]["拍攝項目"] = `<span class="ant-tag ant-tag-orange">${data[i]["拍攝項目"]}</span>`;
+                }
+                else if(data[i]["拍攝項目"] == "證件照"){
+                    data[i]["拍攝項目"] = `<span class="ant-tag ant-tag-cyan">${data[i]["拍攝項目"]}</span>`;
+                }
+                else{
+                    data[i]["拍攝項目"] = `<span class="ant-tag ant-tag-red">${data[i]["拍攝項目"]}</span>`;
+                }
+                tdhtml += `<td class="ant-table-cell">${getDate(data[i]["預約日期"])}<br>${data[i]["預約時段"]}</td>`;
+                tdhtml += `<td nowrap="nowrap" class="ant-table-cell">${data[i]["請問您的大名或英文名"]}(${data[i]["您的性別"]})/${data[i]["人數"]}</td>`;
+                tdhtml += `<td class="ant-table-cell">${data[i]["聯繫電話"]}</td>`;
+                tdhtml += `<td class="ant-table-cell">${data[i]["電子信箱"]}</td>`;
+                tdhtml += `<td class="ant-table-cell">${data[i]["您的職稱或專業領域"]}</td>`;
+                tdhtml += `<td class="ant-table-cell">${data[i]["拍攝項目"]}</td>`;
+                tdhtml += `<td class="ant-table-cell">${data[i]["妝髮"]}</td>`;
+                tdhtml += `<td class="ant-table-cell">${data[i]["備註事項"]}</td>`;
+                tdhtml += `<td class="ant-table-cell"><span class="ant-tag ant-tag-green">報到</span></td>`;
+                $("#custom_data").append(`<tr data-row-key="${i+1}" class="ant-table-row ant-table-row-level-0">${tdhtml}</tr>`);
+                tdhtml = "";
+                if(i==data.length-1)
+                    break;
+            }
+            
+        }
+    });
+
+</script>
